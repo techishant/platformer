@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
     GamePanel gp = null;
-    public boolean wPressed, aPressed, sPressed, dPressed;
+    public boolean wPressed, aPressed, sPressed, dPressed, spacePressed;
     
 
     public KeyHandler(GamePanel gp){
@@ -13,6 +13,7 @@ public class KeyHandler implements KeyListener{
         wPressed = false;
         sPressed = false;
         dPressed = false;
+        spacePressed = false;
     } 
 
     @Override
@@ -21,6 +22,9 @@ public class KeyHandler implements KeyListener{
 
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
             wPressed = true;
+        }
+        if(code == KeyEvent.VK_SPACE){
+            spacePressed = true;
         }
         if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){
             aPressed = true;
@@ -41,10 +45,13 @@ public class KeyHandler implements KeyListener{
             case 0:
             break;
         }
-        
+        if(code == KeyEvent.VK_SPACE){
+            spacePressed = false;
+        }
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
             wPressed = false;
         }
+        
         if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){
             aPressed = false;
         }
