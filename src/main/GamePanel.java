@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import entity.Player;
 import entity.particles.foam;
 import ui.UI;
+import tiles.Tile;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,8 +17,8 @@ public class GamePanel extends JPanel implements Runnable{
     public double dt = 0;
     Thread gameThread;
     int FPS = 60;
-    public final int screenWidth = 768; //768px
-    public final int screenHeight = 576;//576px
+    public final int screenWidth = 16*64; //768px
+    public final int screenHeight = 9*64;//576px
     public KeyHandler keyH = new KeyHandler(this);
     UI ui = new UI(this);
     public int recFPS;
@@ -30,10 +31,9 @@ public class GamePanel extends JPanel implements Runnable{
     public int gameState = 0;
 
     
-    public Player player = new Player(this, keyH, 100, 200, 40, 80, 7);
-
-
+    public Player player = new Player(this, keyH, 100, 200, 40, 40, 7);
     public foam particles[] = new foam[0];
+    public Tile grass = new Tile(1);
 
 
     public GamePanel(){
@@ -95,6 +95,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+
+        grass.draw(g2);
 
         player.draw(g2);
         

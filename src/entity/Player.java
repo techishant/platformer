@@ -5,19 +5,13 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 import main.KeyHandler;
-import util.Point;
 import util.Vector;
 
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
     Vector velocity = new Vector(0,0);
-    Vector gravity = new Vector(0, 9.8f);
-    Vector jumpVelocity = new Vector(0,7);
-    int JUMP_TICKS = 10;
-    Point pos = new Point(0,0);
-    boolean jumping = false;
-    boolean deaccelearating = false;
+    public float speed = 5;
 
     int counter;
     
@@ -43,28 +37,11 @@ public class Player extends Entity{
     public void update(){
         kl();
 
-        if (jumping){
-            
-            if(deaccelearating == false){
-                counter++;
-                velocity.y = -jumpVelocity.y;
-                if (counter > JUMP_TICKS){
-                    deaccelearating = true;
-                }
-            }else{
-                counter--;
-                velocity.y = jumpVelocity.y;
-                if(counter < 1){
-                    deaccelearating = false;
-                    jumping = false;
-                }
-            }
-        }
-
 
         pos.x += velocity.x * gp.dt;
         pos.y += velocity.y * gp.dt;
 
+        
 
         // Keeping player in borders
         if(pos.x + velocity.x < 0){
@@ -87,29 +64,25 @@ public class Player extends Entity{
     }
     
     void kl(){
-        if (keyH.sPressed){
-            this.velocity.y = 15;
+        if(keyH.wPressed){
+            this.velocity.y = -speed;
         }else{
             this.velocity.y = 0;
-                if (keyH.spacePressed && jumping == false){
-                    jumping = true;
-                    keyH.spacePressed = false;
-                    counter = 0;
+            if(keyH.dPressed){
+                this.velocity.x = speed;
+            }else{
+                this.velocity.x = 0;
+                if(keyH.sPressed){
+                    this.velocity.y = speed;
                 }else{
-                    if (!jumping)
-                        velocity.y = gravity.y;
-                    if (keyH.aPressed){
-                        this.velocity.x = -15;
+                    this.velocity.y = 0;
+                    if(keyH.aPressed){
+                        this.velocity.x = -speed;
                     }else{
                         this.velocity.x = 0;
-                            if (keyH.dPressed){
-                                this.velocity.x = 15;
-                            }else{
-                                this.velocity.x = 0;      
-                            }
-                        }  
                     }
+                }
             }
-                
+        }   
     }
 }
