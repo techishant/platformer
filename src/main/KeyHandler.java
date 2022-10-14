@@ -25,6 +25,8 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_SPACE){
             spacePressed = true;
+        }else{
+            spacePressed = false;
         }
         if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){
             aPressed = true;

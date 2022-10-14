@@ -28,6 +28,6 @@ public class UI {
         g2.setColor(Color.red);
         g2.setFont(consolas_20);
         g2.drawString("FPS: " + gp.recFPS, gp.screenWidth-20*5, 20);
-        g2.drawString("Particles: " + gp.particles.length, 10, 60);
+        // g2.drawString("Particles: " + gp.particles.length, 10, 60);
     }
 }
